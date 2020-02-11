@@ -1,13 +1,12 @@
 
 <%- include ('partials/_header'); %>
- 
   <div class="container">
         <div class="row">
             <!-- Form-->
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-body">
-                        <form action="">
+                        <form action="/add" method="POST">
                             <div class="form-group">
                                 <input type="text" name="title" placeholder="Insert a Title" class="form-control">
                             </div>
@@ -32,6 +31,21 @@
                             <th>Operation</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <% for(var i = 0; i < tasks.length; i++ ) {  %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= tasks[i].title %></td>
+                                <td><%= tasks[i].description  %></td>
+                                <td>
+                                    <a href="/change/<%= tasks[i]._id %>"
+                                       class="btn <%= tasks[i].status ? 'btn-success': 'btn-dark' %>">Done</a>
+                                    <a href="/delete/<%= tasks[i]._id %>" class="btn btn-danger">Delete</a>
+                                    <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">Edit</a>
+                                </td>
+                            </tr>
+                            <% } %>
+                    </tbody>
                 </table>
             </div>
         </div>
